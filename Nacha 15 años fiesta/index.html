@@ -1,1 +1,966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invitación - 15 años</title>
 
+<!-- Fuentes de Google -->
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=EB+Garamond:wght@400;500;600;700&family=Forum&family=Great+Vibes&family=Josefin+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Lora:wght@400;500;600;700&family=Marcellus&family=Montserrat:wght@400;500;600;700&family=Parisienne&family=Petit+Formal+Script&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<!-- Iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+  /* Estas variables se actualizarán desde el JS automáticamente */
+  --color-fondo: #080607;
+  --color-nombre: #9b223a;
+  --color-mis15: #e8b7c6;
+  --color-texto-suelto: #ffffff;
+  --color-titulo: #e8b7c6;
+  --color-icono: #e8b7c6;
+  --color-texto-box: #ffffff;
+  --color-texto-box-suave: rgba(255, 255, 255, 0.78);
+  --color-box: rgba(255, 244, 248, 0.18);
+  --color-box-borde: rgba(255, 255, 255, 0.24);
+  --color-boton-1: #e8b7c6;
+  --color-boton-2: #f7dde5;
+  --color-boton-texto: #211318;
+  --color-boton-borde: rgba(255, 255, 255, 0.3);
+  --color-contador-numero: #f7dde5;
+  --color-contador-texto: rgba(255, 255, 255, 0.78);
+  --color-mini-box: rgba(0, 0, 0, 0.26);
+  --color-mini-box-borde: rgba(255, 255, 255, 0.12);
+  --color-panel: rgba(0, 0, 0, 0.28);
+  --color-panel-borde: rgba(255, 255, 255, 0.16);
+  --color-overlay-arriba: rgba(0, 0, 0, 0.24);
+  --color-overlay-abajo: rgba(0, 0, 0, 0.38);
+  --color-overlay-lados: rgba(0, 0, 0, 0.30);
+  --color-overlay-centro: rgba(0, 0, 0, 0.16);
+  --sombra: rgba(0, 0, 0, 0.28);
+  --title-font: 'Great Vibes', cursive;
+  --body-font: 'Cormorant Garamond', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* REQUERIMIENTO 8: VISTA DE CELULAR EN COMPUTADORAS */
+body {
+  font-family: var(--body-font);
+  background-color: #050505; /* Fondo exterior para PC */
+  color: var(--color-texto-suelto);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.mobile-wrapper {
+  width: 100%;
+  max-width: 480px; /* Tamaño del marco (celular) */
+  min-height: 100vh;
+  position: relative;
+  background: var(--color-fondo);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+  overflow-x: clip; /* Usamos clip para evitar scroll lateral sin romper el efecto sticky del fondo */
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================
+   NUEVO SISTEMA DE FONDO FIJO (STICKY)
+   ========================================= */
+.video-container {
+  position: absolute;
+  top: 0; left: 0; 
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sticky-bg {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sticky-bg video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: brightness(0.95) contrast(1.05) saturate(1.08);
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(180deg, var(--color-overlay-arriba), var(--color-overlay-abajo)),
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.12), transparent 35%);
+}
+/* ========================================= */
+
+.content-layer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-bottom: 56px;
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 18px 70px;
+  position: relative;
+}
+
+.hero-content {
+  width: 100%;
+}
+
+/* REQUERIMIENTO 1 y 3: TEXTOS LIBRES EDITABLES DESDE VARIABLES CSS */
+.mis15 {
+  font-family: var(--m15-font, var(--title-font));
+  font-size: var(--m15-size, clamp(4.5rem, 12vw, 5.5rem));
+  color: var(--m15-color, var(--color-mis15));
+  margin-top: var(--m15-mt, 0px);
+  margin-bottom: var(--m15-mb, 15px);
+  margin-left: var(--m15-ml, 0px);
+  margin-right: var(--m15-mr, 0px);
+  line-height: var(--m15-lh, 0.9);
+  font-weight: 400;
+  display: block;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.nombrecumpleanera {
+  font-family: var(--nom-font, var(--title-font));
+  font-size: var(--nom-size, clamp(3.4rem, 10vw, 5.8rem));
+  color: var(--nom-color, var(--color-nombre));
+  margin-top: var(--nom-mt, 0px);
+  margin-bottom: var(--nom-mb, 20px);
+  margin-left: var(--nom-ml, 0px);
+  margin-right: var(--nom-mr, 0px);
+  line-height: var(--nom-lh, 0.9);
+  font-weight: 400;
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.28);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35),
+    0 4px 8px rgba(0, 0, 0, 0.35),
+    0 14px 38px var(--sombra),
+    0 0 24px rgba(255, 255, 255, 0.22);
+  display: block;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.frase-hero {
+  font-family: var(--intro-font, var(--title-font));
+  font-size: var(--intro-size, clamp(1.8rem, 6vw, 2.8rem));
+  color: var(--intro-color, var(--color-texto-suelto));
+  margin-top: var(--intro-mt, 15px);
+  margin-bottom: var(--intro-mb, 30px);
+  margin-left: var(--intro-ml, 5px);
+  margin-right: var(--intro-mr, 5px);
+  line-height: var(--intro-lh, 1.4);
+  text-shadow: 0 10px 34px var(--sombra);
+}
+
+.frase-final {
+  font-family: var(--fin-font, var(--title-font));
+  font-size: var(--fin-size, clamp(1.8rem, 6vw, 2.8rem));
+  color: var(--fin-color, var(--color-texto-suelto));
+  margin-top: var(--fin-mt, 10px);
+  margin-bottom: var(--fin-mb, 10px);
+  margin-left: var(--fin-ml, 0px);
+  margin-right: var(--fin-mr, 0px);
+  line-height: var(--fin-lh, 1.4);
+  text-shadow: 0 10px 34px var(--sombra);
+}
+
+/* REQUERIMIENTO 2: BOTONES MÁS JUNTOS Y ALINEADOS */
+.acciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--distancia-botones, 15px);
+  margin-top: 25px;
+}
+
+.btn, a.button {
+  font-family: var(--body-font);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-boton-1), var(--color-boton-2));
+  color: var(--color-boton-texto);
+  border: 1px solid var(--color-boton-borde);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 28px var(--sombra);
+}
+
+.btn-musica {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn:hover, a.button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 14px 34px var(--sombra);
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-icono);
+  font-size: 30px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+/* CAJAS DE INFORMACIÓN (BOXES) */
+#info {
+  padding: 8px 16px 42px;
+}
+
+.box {
+  width: 100%; 
+  margin: var(--box-margen-fuera, 35px auto);
+  padding: var(--box-padding, 30px 20px);
+  border-radius: 18px;
+  background: var(--color-box);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--color-box-borde);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* REQUERIMIENTO 4: TÍTULOS DE BOXES UNIFICADOS Y EDITABLES */
+.box h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--tit-box-font, var(--title-font));
+  font-size: var(--tit-box-size, clamp(1.8rem, 6vw, 2.2rem));
+  color: var(--tit-box-color, var(--color-titulo));
+  line-height: var(--tit-box-lh, 1.2);
+  margin-top: var(--tit-box-mt, 0px);
+  margin-bottom: var(--tit-box-mb, 15px);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.box h2 i { color: var(--color-icono); }
+
+/* REQUERIMIENTO 6: TEXTOS DE BOXES EDITABLES INDEPENDIENTES */
+.texto-box-unificado {
+  font-family: var(--txt-box-font, var(--body-font));
+  font-size: var(--txt-box-size, 1.15rem);
+  color: var(--txt-box-color, var(--color-texto-box));
+  line-height: var(--txt-box-lh, 1.6);
+  margin-top: var(--txt-box-mt, 0px);
+  margin-bottom: var(--txt-box-mb, 15px);
+  max-width: 650px;
+}
+
+.box-texto { max-width: 650px; margin-bottom: 20px; }
+
+/* REQUERIMIENTO 5: SEPARADOR PARA CAJA DE FECHA Y LUGAR */
+.separador-caja {
+  width: 65%;
+  height: 1px;
+  background-color: var(--color-box-borde);
+  margin: 20px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* COMPONENTES EXTRAS (CONTADOR, CARRUSEL, REGALO) */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(62px, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+  padding: 10px 4px;
+  border-radius: 14px;
+  background: var(--color-mini-box);
+  border: 1px solid var(--color-mini-box-borde);
+}
+
+.time span {
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  color: var(--color-contador-numero);
+  font-weight: 700;
+  display: block;
+}
+
+.time small {
+  font-size: 0.83rem;
+  color: var(--color-contador-texto);
+  margin-top: 5px;
+}
+
+.carousel { position: relative; width: 100%; }
+.carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--color-panel-borde);
+  background: var(--color-panel);
+  touch-action: pan-y;
+}
+.carousel-track {
+  display: flex;
+  height: clamp(320px, 80vw, 420px);
+  transition: transform 0.55s ease;
+}
+.slide-frame {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-mini-box);
+}
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: blur(22px) brightness(0.72);
+  transform: scale(1.12);
+  opacity: 0.7;
+}
+.slide {
+  position: relative;
+  z-index: 1;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-boton-borde);
+  background: var(--color-panel);
+  color: var(--color-texto-box);
+  display: grid; place-items: center;
+  cursor: pointer; z-index: 2;
+}
+.carousel-btn.prev { left: 8px; }
+.carousel-btn.next { right: 8px; }
+.carousel-dots {
+  display: flex; justify-content: center; gap: 8px; margin-top: 14px;
+}
+.carousel-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 0; background: var(--color-texto-box-suave);
+}
+.carousel-dot.active { background: var(--color-icono); transform: scale(1.35); }
+
+.modulo-opcional[hidden] { display: none; }
+
+.gift-panel {
+  width: 100%;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-panel-borde);
+  text-align: left;
+}
+.gift-panel[hidden] { display: none; }
+.gift-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-panel-borde);
+  font-size: 1.08rem;
+  color: var(--color-texto-box);
+  text-align: center;
+}
+.gift-row:last-child { border-bottom: 0; }
+.gift-row strong { color: var(--color-titulo); }
+.copy-actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+.copy-btn { min-height: 38px; padding: 9px 14px; font-size: 0.98rem; }
+
+.animated-icon { animation: iconFloat 2.6s ease-in-out infinite; transform-origin: center; }
+.box:nth-child(2) .animated-icon { animation-delay: 0.2s; }
+.box:nth-child(3) .animated-icon { animation-delay: 0.4s; }
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 transparent); }
+  50% { transform: translateY(-4px) scale(1.08); filter: drop-shadow(0 0 8px var(--color-icono)); }
+}
+.final-butterfly { text-align: center; margin-top: 25px; }
+.final-butterfly img { width: 60px; height: auto; opacity: 0.85; }
+
+/* Mensaje de llegada del día */
+.mensaje-llegada-texto {
+  font-family: var(--title-font);
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  color: var(--color-titulo);
+  margin: 0;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CONTENEDOR MÓVIL ESTILIZADO -->
+<div class="mobile-wrapper">
+  
+  <!-- FONDO DE VIDEO FIJO Y EN BUCLE -->
+  <div class="video-container">
+    <div class="sticky-bg">
+      <video class="bg-video-main" autoplay muted loop playsinline preload="auto">
+        <source src="fondo.mp4" type="video/mp4">
+      </video>
+      <div class="overlay"></div>
+    </div>
+  </div>
+
+  <div class="content-layer">
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <!-- Textos Libres Editables -->
+          <div class="mis15">Mis 15<br>años</div>
+          <h1 id="name" class="nombrecumpleanera"></h1>
+          <div class="frase-hero">
+            Se acerca<br> la noche tan soñada...<br>
+            y deseo compartirla contigo
+          </div>
+
+          <div class="acciones">
+            <button class="btn" type="button" onclick="scrollToInfo()">Ver invitación</button>
+            <button class="btn btn-musica" type="button" onclick="toggleMusic()" aria-label="Reproducir música">
+              <i class="fa-solid fa-music"></i>
+            </button>
+          </div>
+
+          <audio id="music" preload="auto">
+            <source src="musica.mp3" type="audio/mpeg">
+          </audio>
+
+          <div class="scroll-down" aria-hidden="true">↓</div>
+        </div>
+      </section>
+
+      <section id="info">
+        <!-- BOX 1: CONTADOR -->
+        <div class="box">
+          <h2><i class="fa-regular fa-clock animated-icon"></i> Sólo Faltan...</h2>
+          
+          <div id="countdown-container" class="countdown">
+            <div class="time"><span id="d">0</span><small>Días</small></div>
+            <div class="time"><span id="h">0</span><small>Horas</small></div>
+            <div class="time"><span id="m">0</span><small>Minutos</small></div>
+            <div class="time"><span id="s">0</span><small>Segundos</small></div>
+          </div>
+          
+          <!-- REQUERIMIENTO 7: Mensaje de "Llegó el día" -->
+          <div id="mensaje-llegada" style="display: none;">
+            <p class="mensaje-llegada-texto">¡Llegó el día!</p>
+          </div>
+        </div>
+
+        <!-- BOX 2: FECHA Y LUGAR -->
+        <div class="box detalle-evento">
+          <h2><i class="fa-regular fa-calendar animated-icon"></i> Fecha y hora:</h2>
+          <p id="dateText" class="texto-box-unificado"></p>
+          <p id="timeText" class="texto-box-unificado"></p>
+          
+          <div class="separador-caja"></div>
+          
+          <h2><i class="fa-solid fa-location-dot animated-icon"></i> Lugar:</h2>
+          <p id="venueText" class="texto-box-unificado"></p>
+          <p id="addressText" class="texto-box-unificado"></p>
+        </div>
+
+        <!-- BOX 3: MAPA -->
+        <div class="box">
+          <h2><i class="fa-solid fa-map-location-dot animated-icon"></i> Mapa</h2>
+          <p class="texto-box-unificado">Tocá y conocé el lugar.</p>
+          <!-- REQUERIMIENTO 10: target="_blank" -->
+          <a id="mapLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Ver mapa</a>
+        </div>
+
+        <!-- BOX 4: DRESS CODE -->
+        <div class="box">
+          <h2><i class="fa-solid fa-wand-magic-sparkles animated-icon"></i> Dress code</h2>
+          <p id="dressCodeText" class="texto-box-unificado"></p>
+        </div>
+        
+        <!-- BOX 5: CARRUSEL -->
+        <div class="box">
+          <h2><i class="fa-regular fa-image animated-icon"></i> Mis recuerdos</h2>
+          <div class="carousel" aria-label="Carrete de fotos">
+            <button class="carousel-btn prev" type="button" aria-label="Foto anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carousel-viewport">
+              <div id="carouselTrack" class="carousel-track"></div>
+            </div>
+            <button class="carousel-btn next" type="button" aria-label="Foto siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+            <div id="carouselDots" class="carousel-dots" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- BOX 6: ASISTENCIA -->
+        <div class="box">
+          <h2><i class="fa-regular fa-heart animated-icon"></i> Asistencia</h2>
+          <p class="texto-box-unificado">
+            Tu presencia es muy<br> importante para mí.<br>
+            ¡Me encantaría<br> que me acompañes<br>en esta noche tan especial!
+          </p>
+          <!-- REQUERIMIENTO 10: target="_blank" -->
+          <a id="confirmLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
+        </div>
+
+        <!-- BOX 7: ÁLBUM FOTOS -->
+        <div id="albumFotosModule" class="box modulo-opcional">
+          <h2><i class="fa-solid fa-camera animated-icon"></i> Álbum de la fiesta</h2>
+          <p class="texto-box-unificado">Compartí acá<br> las fotos más lindas que<br> sacaste del cumple!</p>
+          <!-- REQUERIMIENTO 10: target="_blank" -->
+          <a id="albumFotosLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Subir fotos</a>
+        </div>
+
+        <!-- BOX 8: PLAYLIST -->
+        <div id="playlistModule" class="box modulo-opcional">
+          <h2><i class="fa-solid fa-record-vinyl animated-icon"></i> ¡Playlist!</h2>
+          <p class="texto-box-unificado">¡Ayudame sugiriendo<br> las canciones que pensás<br> que no pueden faltar en la fiesta!</p>
+          <!-- REQUERIMIENTO 10: target="_blank" -->
+          <a id="playlistLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Sugerir Canción</a>
+        </div>
+
+        <!-- BOX 9: REGALO -->
+        <div id="giftModule" class="box modulo-opcional">
+          <h2><i class="fa-solid fa-gift animated-icon"></i> Regalo</h2>
+          <p class="texto-box-unificado">
+            El mejor regalo es que vengas,<br> pero si deseás regalarme algo,<br> podés colaborar con mis sueños<br> y anhelos.¡Muchas gracias!
+          </p>
+          <button class="btn" type="button" onclick="toggleGiftPanel()">Ver Colectivo</button>
+
+          <div id="giftPanel" class="gift-panel" hidden>
+            <div class="gift-row"><strong>Titular:</strong><span id="giftTitular"></span></div>
+            <div class="gift-row"><strong>Banco:</strong><span id="giftBanco"></span></div>
+            <div class="gift-row"><strong>Cuenta:</strong><span id="giftCuenta"></span></div>
+            <div class="gift-row"><strong>CI:</strong><span id="giftCi"></span></div>
+            <div class="copy-actions">
+              <button class="btn copy-btn" type="button" onclick="copiarDato(CONFIG.regalo.cuenta)">Copiar cuenta</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESPEDIDA -->
+        <div class="box">
+          <div class="frase-final">
+            Te espero para compartir<br>
+            este momento tan especial...<br>
+            ¡Será una noche<br>
+            para recordar siempre!
+          </div>
+          <div class="final-butterfly">
+            <img src="" alt="">
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+// ========================================================================
+// CONFIGURACIÓN PRINCIPAL (DATOS)
+// ========================================================================
+const CONFIG = {
+  // --- PALETA Y FUENTES GLOBALES ---
+  paleta: "esmeralda",
+  fuentes: "Petit Formal Script",
+
+  colores: {
+    fondo: "", nombre: "#00B893", mis15: "", textosSueltos: "", titulos: "editorial",
+    iconos: "", textoBoxes: "editorial", textoBoxesSuave: "", boxes: "", bordeBoxes: "",
+    botonFondo1: "", botonFondo2: "", botonTexto: "", botonBorde: "", contadorNumeros: "",
+    contadorTexto: "", miniBoxes: "", bordeMiniBoxes: "", panelRegalo: "", bordePanelRegalo: "",
+    overlayArriba: "", overlayAbajo: "", overlayLados: "", overlayCentro: "", sombra: ""
+  },
+
+  // --- REQUERIMIENTO 9: MENÚ DE EDICIÓN AVANZADA DE TEXTOS Y MÁRGENES ---
+  edicionAvanzada: {
+    textos: {
+      mis15: { // Ajusta el texto "Mis 15 años" superior
+        margenArriba: "40px",   // Sube o baja el texto del techo (ej: "80px", "20px")
+        margenAbajo: "15px",    // Separación con el nombre de la quinceañera
+        margenIzquierda: "0px",
+        margenDerecha: "0px",
+        fuente: "var(--title-font)", 
+        tamaño: "clamp(4.5rem, 12vw, 5.5rem)", // Tamaño de letra
+        color: "var(--color-mis15)",
+        interlineado: "0.9"
+      },
+      nombre: { // Ajusta el nombre de la cumpleañera
+        margenArriba: "0px",
+        margenAbajo: "20px",    // Separación con la frase introductoria
+        margenIzquierda: "0px",
+        margenDerecha: "0px",
+        fuente: "var(--title-font)",
+        tamaño: "clamp(3.4rem, 10vw, 5.8rem)",
+        color: "var(--color-nombre)",
+        interlineado: "0.9"
+      },
+      introduccion: { // Ajusta la frase que dice "Se acerca la noche tan soñada..."
+        margenArriba: "15px",
+        margenAbajo: "30px",    // Separación con los botones
+        margenIzquierda: "5px",
+        margenDerecha: "5px",
+        fuente: "var(--title-font)",
+        tamaño: "clamp(1.8rem, 6vw, 2.8rem)",
+        color: "var(--color-texto-suelto)",
+        interlineado: "1.4"
+      },
+      mensajeFinal: { // Ajusta el mensaje final de despedida
+        margenArriba: "10px",
+        margenAbajo: "10px",
+        margenIzquierda: "0px",
+        margenDerecha: "0px",
+        fuente: "var(--title-font)",
+        tamaño: "clamp(1.8rem, 6vw, 2.8rem)",
+        color: "var(--color-texto-suelto)",
+        interlineado: "1.4"
+      }
+    },
+    cajas: { // Todo lo relacionado a los Boxes transparentes
+      titulos: { // Títulos como "Sólo Faltan", "Fecha", "Lugar", "Asistencia" (Todos iguales)
+        fuente: "var(--title-font)",
+        tamaño: "clamp(1.8rem, 6vw, 2.2rem)",
+        color: "var(--color-titulo)",
+        margenArriba: "0px",
+        margenAbajo: "15px",
+        interlineado: "1.2"
+      },
+      textos: { // Textos informativos de adentro de las cajas
+        fuente: "var(--body-font)",
+        tamaño: "1.3rem",
+        color: "var(--color-texto-box)",
+        margenArriba: "0px",
+        margenAbajo: "15px",
+        interlineado: "1.6"
+      },
+      diseñoBox: {
+        margenExterior: "30px auto", // Separación entre caja y caja (arriba-abajo auto)
+        rellenoInterior: "30px 20px" // Espacio interno de la caja (arriba-abajo, izquierda-derecha)
+      }
+    },
+    botones: {
+      distanciaEntreBotones: "15px" // Regula la separación entre el botón de Ver Invitación y el de Música
+    }
+  },
+
+  // --- DATOS DE LA FIESTA ---
+  mostrarRegalo: true,
+  mostrarPlaylist: true,
+  mostrarAlbumFotos: true,
+  playlistTipo: "google", 
+  playlistLink: "https://docs.google.com/forms/d/e/1FAIpQLSc0M2amKtZmo0LQ6-le8baC1yZ47R-IweK83PalYt0EIObJGA/viewform?usp=sharing&ouid=108226770807790576500", // Aquí tu link
+  spotifyLink: "https://open.spotify.com/playlist/XXXXXXXX",
+  whatsappPlaylist: "123456789",
+  nombre: "Julieta",
+  fechaEvento: "2026-10-17T20:00:00",
+  fechaTexto: "Sábado 17 de octubre",
+  horaTexto: "20:00 horas-puntual",
+  salon: "Aurora Palace",
+  direccion: "Avenida Las Flores 2020.",
+  mapa: "https://maps.app.goo.gl/cKfbAR5rutndHhUD8",
+  dressCode: "Semi-formal<br>Reservamos el color blanco<br>para mi vestimenta",
+  formularioAsistencia: "https://docs.google.com/forms/d/e/1FAIpQLScZhjYcfePL1Ylu4gyruySPntMRvHBywHx09yzgDPboeVvNSQ/viewform?usp=sharing&ouid=108226770807790576500", // Aquí tu link
+  albumFotosLink: "https://docs.google.com/forms/d/e/1FAIpQLScmQNGoapK8xgvTQfr6dpjUac8bcL_V44ABJwGHziPkILef2A/viewform?usp=sharing&ouid=108226770807790576500", // Aquí tu link
+  mensajePlaylistWhatsApp: "Hola, quiero sugerir una canción para la fiesta: ",
+  regalo: {
+    titular: "Nombre Apellido",
+    banco: "Banco XXXX",
+    cuenta: "1234567890",
+    ci: "1.234.567-8"
+  },
+  fotos: [
+    "foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg", "foto6.jpg"
+  ]
+};
+
+// ========================================================================
+// SISTEMA (NO ES NECESARIO MODIFICAR ABAJO DE ESTA LÍNEA)
+// ========================================================================
+const PALETAS = {
+  rosa: { fondo: "#080607", nombre: "#9b223a", mis15: "#e8b7c6", textosSueltos: "#ffffff", titulos: "#e8b7c6", iconos: "#e8b7c6", textoBoxes: "#ffffff", textoBoxesSuave: "rgba(255, 255, 255, 0.78)", boxes: "rgba(255, 235, 242, 0.18)", bordeBoxes: "rgba(255, 255, 255, 0.25)", botonFondo1: "#e8b7c6", botonFondo2: "#ffe3eb", botonTexto: "#211318", botonBorde: "rgba(255, 255, 255, 0.30)", contadorNumeros: "#ffe3eb", contadorTexto: "rgba(255, 255, 255, 0.78)", miniBoxes: "rgba(0, 0, 0, 0.26)", bordeMiniBoxes: "rgba(255, 255, 255, 0.12)", panelRegalo: "rgba(0, 0, 0, 0.28)", bordePanelRegalo: "rgba(255, 255, 255, 0.16)", overlayArriba: "rgba(0, 0, 0, 0.34)", overlayAbajo: "rgba(0, 0, 0, 0.58)", overlayLados: "rgba(0, 0, 0, 0.50)", overlayCentro: "rgba(0, 0, 0, 0.16)", sombra: "rgba(0, 0, 0, 0.28)" },
+  esmeralda: { fondo: "#03110d", nombre: "#f3fff9", mis15: "#70d6a5", textosSueltos: "#f3fff9", titulos: "#70d6a5", iconos: "#bfffe0", textoBoxes: "#f3fff9", textoBoxesSuave: "rgba(243, 255, 249, 0.76)", boxes: "rgba(144, 236, 184, 0.16)", bordeBoxes: "rgba(220, 255, 235, 0.23)", botonFondo1: "#70d6a5", botonFondo2: "#d8ffe9", botonTexto: "#03160d", botonBorde: "rgba(255, 255, 255, 0.30)", contadorNumeros: "#d8ffe9", contadorTexto: "rgba(243, 255, 249, 0.76)", miniBoxes: "rgba(0, 0, 0, 0.28)", bordeMiniBoxes: "rgba(255, 255, 255, 0.12)", panelRegalo: "rgba(0, 0, 0, 0.30)", bordePanelRegalo: "rgba(255, 255, 255, 0.16)", overlayArriba: "rgba(0, 0, 0, 0)", overlayAbajo: "rgba(0, 0, 0, 0)", overlayLados: "rgba(0, 0, 0, 0)", overlayCentro: "rgba(0, 0, 0, 0)", sombra: "rgba(0, 0, 0, 0.30)" }
+};
+
+const FUENTES = {
+  elegante: { titulo: "'Great Vibes', cursive", texto: "'Cormorant Garamond', serif" },
+  princesa: { titulo: "'Petit Formal Script', cursive", texto: "'EB Garamond', serif" },
+  editorial: { titulo: "'Playfair Display', serif", texto: "'Josefin Sans', sans-serif" }
+};
+
+const VARIABLES_COLOR = {
+  fondo: "--color-fondo", nombre: "--color-nombre", mis15: "--color-mis15", textosSueltos: "--color-texto-suelto", titulos: "--color-titulo", iconos: "--color-icono", textoBoxes: "--color-texto-box", textoBoxesSuave: "--color-texto-box-suave", boxes: "--color-box", bordeBoxes: "--color-box-borde", botonFondo1: "--color-boton-1", botonFondo2: "--color-boton-2", botonTexto: "--color-boton-texto", botonBorde: "--color-boton-borde", contadorNumeros: "--color-contador-numero", contadorTexto: "--color-contador-texto", miniBoxes: "--color-mini-box", bordeMiniBoxes: "--color-mini-box-borde", panelRegalo: "--color-panel", bordePanelRegalo: "--color-panel-borde", overlayArriba: "--color-overlay-arriba", overlayAbajo: "--color-overlay-abajo", overlayLados: "--color-overlay-lados", overlayCentro: "--color-overlay-centro", sombra: "--sombra"
+};
+
+let currentSlide = 0; let sliderTimer;
+
+function aplicarColoresYFuentes() {
+  const paleta = PALETAS[CONFIG.paleta] || PALETAS.rosa;
+  const coloresFinales = { ...paleta };
+  const fuentes = FUENTES[CONFIG.fuentes] || FUENTES.elegante;
+  const root = document.documentElement;
+
+  Object.keys(CONFIG.colores || {}).forEach(nc => {
+    if (typeof CONFIG.colores[nc] === "string" && CONFIG.colores[nc].trim() !== "") coloresFinales[nc] = CONFIG.colores[nc].trim();
+  });
+  Object.entries(VARIABLES_COLOR).forEach(([nc, vc]) => {
+    if (coloresFinales[nc]) root.style.setProperty(vc, coloresFinales[nc]);
+  });
+  root.style.setProperty("--title-font", fuentes.titulo);
+  root.style.setProperty("--body-font", fuentes.texto);
+}
+
+function aplicarEdicionAvanzada() {
+  const r = document.documentElement;
+  const ed = CONFIG.edicionAvanzada;
+
+  // Textos libres
+  r.style.setProperty('--m15-mt', ed.textos.mis15.margenArriba);
+  r.style.setProperty('--m15-mb', ed.textos.mis15.margenAbajo);
+  r.style.setProperty('--m15-ml', ed.textos.mis15.margenIzquierda);
+  r.style.setProperty('--m15-mr', ed.textos.mis15.margenDerecha);
+  r.style.setProperty('--m15-font', ed.textos.mis15.fuente);
+  r.style.setProperty('--m15-size', ed.textos.mis15.tamaño);
+  r.style.setProperty('--m15-color', ed.textos.mis15.color);
+  r.style.setProperty('--m15-lh', ed.textos.mis15.interlineado);
+
+  r.style.setProperty('--nom-mt', ed.textos.nombre.margenArriba);
+  r.style.setProperty('--nom-mb', ed.textos.nombre.margenAbajo);
+  r.style.setProperty('--nom-ml', ed.textos.nombre.margenIzquierda);
+  r.style.setProperty('--nom-mr', ed.textos.nombre.margenDerecha);
+  r.style.setProperty('--nom-font', ed.textos.nombre.fuente);
+  r.style.setProperty('--nom-size', ed.textos.nombre.tamaño);
+  r.style.setProperty('--nom-color', ed.textos.nombre.color);
+  r.style.setProperty('--nom-lh', ed.textos.nombre.interlineado);
+
+  r.style.setProperty('--intro-mt', ed.textos.introduccion.margenArriba);
+  r.style.setProperty('--intro-mb', ed.textos.introduccion.margenAbajo);
+  r.style.setProperty('--intro-ml', ed.textos.introduccion.margenIzquierda);
+  r.style.setProperty('--intro-mr', ed.textos.introduccion.margenDerecha);
+  r.style.setProperty('--intro-font', ed.textos.introduccion.fuente);
+  r.style.setProperty('--intro-size', ed.textos.introduccion.tamaño);
+  r.style.setProperty('--intro-color', ed.textos.introduccion.color);
+  r.style.setProperty('--intro-lh', ed.textos.introduccion.interlineado);
+
+  r.style.setProperty('--fin-mt', ed.textos.mensajeFinal.margenArriba);
+  r.style.setProperty('--fin-mb', ed.textos.mensajeFinal.margenAbajo);
+  r.style.setProperty('--fin-ml', ed.textos.mensajeFinal.margenIzquierda);
+  r.style.setProperty('--fin-mr', ed.textos.mensajeFinal.margenDerecha);
+  r.style.setProperty('--fin-font', ed.textos.mensajeFinal.fuente);
+  r.style.setProperty('--fin-size', ed.textos.mensajeFinal.tamaño);
+  r.style.setProperty('--fin-color', ed.textos.mensajeFinal.color);
+  r.style.setProperty('--fin-lh', ed.textos.mensajeFinal.interlineado);
+
+  // Cajas (Boxes)
+  r.style.setProperty('--tit-box-font', ed.cajas.titulos.fuente);
+  r.style.setProperty('--tit-box-size', ed.cajas.titulos.tamaño);
+  r.style.setProperty('--tit-box-color', ed.cajas.titulos.color);
+  r.style.setProperty('--tit-box-mt', ed.cajas.titulos.margenArriba);
+  r.style.setProperty('--tit-box-mb', ed.cajas.titulos.margenAbajo);
+  r.style.setProperty('--tit-box-lh', ed.cajas.titulos.interlineado);
+
+  r.style.setProperty('--txt-box-font', ed.cajas.textos.fuente);
+  r.style.setProperty('--txt-box-size', ed.cajas.textos.tamaño);
+  r.style.setProperty('--txt-box-color', ed.cajas.textos.color);
+  r.style.setProperty('--txt-box-mt', ed.cajas.textos.margenArriba);
+  r.style.setProperty('--txt-box-mb', ed.cajas.textos.margenAbajo);
+  r.style.setProperty('--txt-box-lh', ed.cajas.textos.interlineado);
+
+  r.style.setProperty('--box-margen-fuera', ed.cajas.diseñoBox.margenExterior);
+  r.style.setProperty('--box-padding', ed.cajas.diseñoBox.rellenoInterior);
+
+  // Botones
+  r.style.setProperty('--distancia-botones', ed.botones.distanciaEntreBotones);
+}
+
+function cargarDatos() {
+  document.getElementById("name").innerHTML = CONFIG.nombre;
+  document.getElementById("dateText").innerHTML = CONFIG.fechaTexto;
+  document.getElementById("timeText").innerHTML = CONFIG.horaTexto;
+  document.getElementById("venueText").innerHTML = CONFIG.salon;
+  document.getElementById("addressText").innerHTML = CONFIG.direccion;
+  document.getElementById("mapLink").href = CONFIG.mapa;
+  document.getElementById("dressCodeText").innerHTML = CONFIG.dressCode;
+  document.getElementById("confirmLink").href = CONFIG.formularioAsistencia;
+}
+
+function configurarExtras() {
+  document.getElementById("giftModule").hidden = !CONFIG.mostrarRegalo;
+  document.getElementById("playlistModule").hidden = !CONFIG.mostrarPlaylist;
+  document.getElementById("albumFotosModule").hidden = !CONFIG.mostrarAlbumFotos;
+
+  if (CONFIG.mostrarRegalo) {
+    document.getElementById("giftTitular").innerText = CONFIG.regalo.titular;
+    document.getElementById("giftBanco").innerText = CONFIG.regalo.banco;
+    document.getElementById("giftCuenta").innerText = CONFIG.regalo.cuenta;
+    document.getElementById("giftCi").innerText = CONFIG.regalo.ci;
+  }
+  if (CONFIG.mostrarPlaylist) {
+    const pLink = document.getElementById("playlistLink");
+    pLink.href = CONFIG.playlistTipo === "google" ? CONFIG.playlistLink : CONFIG.spotifyLink;
+  }
+  if (CONFIG.mostrarAlbumFotos) {
+    document.getElementById("albumFotosLink").href = CONFIG.albumFotosLink;
+  }
+}
+
+function actualizarCuentaRegresiva() {
+  const now = Date.now();
+  const diff = new Date(CONFIG.fechaEvento).getTime() - now;
+  const restante = Math.max(diff, 0);
+
+  // Requerimiento 7: Detener en 0 y mostrar mensaje
+  if (restante <= 0) {
+    document.getElementById("countdown-container").style.display = "none";
+    document.getElementById("mensaje-llegada").style.display = "block";
+    return; // Detiene la ejecución para no mostrar negativos
+  }
+
+  document.getElementById("d").innerText = Math.floor(restante / 86400000);
+  document.getElementById("h").innerText = Math.floor((restante % 86400000) / 3600000);
+  document.getElementById("m").innerText = Math.floor((restante % 3600000) / 60000);
+  document.getElementById("s").innerText = Math.floor((restante % 60000) / 1000);
+}
+
+function scrollToInfo() { document.getElementById("info").scrollIntoView({ behavior: "smooth" }); }
+function toggleMusic() { const m = document.getElementById("music"); m.paused ? m.play() : m.pause(); }
+function toggleGiftPanel() { const p = document.getElementById("giftPanel"); p.hidden = !p.hidden; }
+
+function copiarDato(valor) {
+  if (!valor) return;
+  if (navigator.clipboard) { navigator.clipboard.writeText(valor); return; }
+  const input = document.createElement("input");
+  input.value = valor; document.body.appendChild(input);
+  input.select(); document.execCommand("copy"); input.remove();
+}
+
+function iniciarCarrusel() {
+  const track = document.getElementById("carouselTrack");
+  const dots = document.getElementById("carouselDots");
+  if(!CONFIG.fotos || CONFIG.fotos.length === 0) return;
+
+  CONFIG.fotos.forEach((foto, index) => {
+    const frame = document.createElement("div"); frame.className = "slide-frame";
+    const bg = document.createElement("img"); bg.className = "slide-bg"; bg.src = foto; bg.setAttribute("aria-hidden", "true");
+    const img = document.createElement("img"); img.className = "slide"; img.src = foto; img.alt = `Recuerdo ${index + 1}`;
+    frame.appendChild(bg); frame.appendChild(img); track.appendChild(frame);
+    const dot = document.createElement("button"); dot.className = "carousel-dot"; dot.type = "button";
+    dot.addEventListener("click", () => irASlide(index)); dots.appendChild(dot);
+  });
+
+  document.querySelector(".carousel-btn.prev").addEventListener("click", () => cambiarSlide(-1));
+  document.querySelector(".carousel-btn.next").addEventListener("click", () => cambiarSlide(1));
+
+  let startX = 0, endX = 0; const viewport = document.querySelector(".carousel-viewport");
+  viewport.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+  viewport.addEventListener("touchmove", e => endX = e.touches[0].clientX, { passive: true });
+  viewport.addEventListener("touchend", () => {
+    const dist = endX - startX; if (Math.abs(dist) > 45) cambiarSlide(dist > 0 ? -1 : 1);
+    startX = 0; endX = 0;
+  });
+  viewport.addEventListener("mousedown", e => startX = e.clientX);
+  viewport.addEventListener("mouseup", e => {
+    const dist = e.clientX - startX; if (Math.abs(dist) > 45) cambiarSlide(dist > 0 ? -1 : 1);
+    startX = 0;
+  });
+
+  irASlide(0); reiniciarAutoplay();
+}
+
+function irASlide(index) {
+  const total = CONFIG.fotos.length; currentSlide = (index + total) % total;
+  document.getElementById("carouselTrack").style.transform = `translateX(-${currentSlide * 100}%)`;
+  document.querySelectorAll(".carousel-dot").forEach((dot, idx) => dot.classList.toggle("active", idx === currentSlide));
+  reiniciarAutoplay();
+}
+
+function cambiarSlide(dir) { irASlide(currentSlide + dir); }
+function reiniciarAutoplay() { clearInterval(sliderTimer); sliderTimer = setInterval(() => cambiarSlide(1), 3600); }
+
+function intentarAutoplayMusica() {
+  const m = document.getElementById("music");
+  const playPromise = m.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(function(error) {
+      // Fallo silencioso: el navegador bloqueó el autoplay.
+      // El usuario podrá reproducir la música utilizando el botón de la interfaz.
+    });
+  }
+}
+
+// Inicialización
+aplicarColoresYFuentes();
+aplicarEdicionAvanzada();
+cargarDatos();
+configurarExtras();
+actualizarCuentaRegresiva();
+setInterval(actualizarCuentaRegresiva, 1000);
+window.addEventListener("load", iniciarCarrusel);
+window.addEventListener("load", intentarAutoplayMusica); // <- Nueva función añadida
+
+</script>
+</body>
+</html>
