@@ -45,7 +45,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* REQUERIMIENTO 8: VISTA DE CELULAR EN COMPUTADORAS */
+/* VISTA DE CELULAR EN COMPUTADORAS */
 body {
   font-family: var(--body-font);
   background-color: #050505; /* Fondo exterior para PC */
@@ -62,14 +62,12 @@ body {
   position: relative;
   background: var(--color-fondo);
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
-  overflow-x: clip; /* Usamos clip para evitar scroll lateral sin romper el efecto sticky del fondo */
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
 }
 
-/* =========================================
-   NUEVO SISTEMA DE FONDO FIJO (STICKY)
-   ========================================= */
+/* SISTEMA DE FONDO FIJO (STICKY) */
 .video-container {
   position: absolute;
   top: 0; left: 0; 
@@ -105,7 +103,6 @@ body {
     linear-gradient(180deg, var(--color-overlay-arriba), var(--color-overlay-abajo)),
     radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.12), transparent 35%);
 }
-/* ========================================= */
 
 .content-layer {
   position: relative;
@@ -129,7 +126,6 @@ body {
   width: 100%;
 }
 
-/* REQUERIMIENTO 1 y 3: TEXTOS LIBRES EDITABLES DESDE VARIABLES CSS */
 .mis15 {
   font-family: var(--m15-font, var(--title-font));
   font-size: var(--m15-size, clamp(4.5rem, 12vw, 5.5rem));
@@ -190,7 +186,6 @@ body {
   text-shadow: 0 10px 34px var(--sombra);
 }
 
-/* REQUERIMIENTO 2: BOTONES MÁS JUNTOS Y ALINEADOS */
 .acciones {
   display: flex;
   justify-content: center;
@@ -271,7 +266,6 @@ body {
   text-align: center;
 }
 
-/* REQUERIMIENTO 4: TÍTULOS DE BOXES UNIFICADOS Y EDITABLES */
 .box h2 {
   display: flex;
   align-items: center;
@@ -289,7 +283,6 @@ body {
 
 .box h2 i { color: var(--color-icono); }
 
-/* REQUERIMIENTO 6: TEXTOS DE BOXES EDITABLES INDEPENDIENTES */
 .texto-box-unificado {
   font-family: var(--txt-box-font, var(--body-font));
   font-size: var(--txt-box-size, 1.15rem);
@@ -302,7 +295,6 @@ body {
 
 .box-texto { max-width: 650px; margin-bottom: 20px; }
 
-/* REQUERIMIENTO 5: SEPARADOR PARA CAJA DE FECHA Y LUGAR */
 .separador-caja {
   width: 65%;
   height: 1px;
@@ -311,7 +303,6 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-/* COMPONENTES EXTRAS (CONTADOR, CARRUSEL, REGALO) */
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, minmax(62px, 1fr));
@@ -382,7 +373,8 @@ body {
   width: 100%; height: 100%;
   object-fit: contain;
   user-select: none;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
 }
 .carousel-btn {
   position: absolute;
@@ -406,6 +398,58 @@ body {
   border: 0; background: var(--color-texto-box-suave);
 }
 .carousel-dot.active { background: var(--color-icono); transform: scale(1.35); }
+
+/* ESTILOS PARA EL LIGHTBOX / FOTO AMPLIADA */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.92);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.lightbox-modal.active {
+  display: flex;
+}
+.lightbox-content {
+  position: relative;
+  max-width: 100%;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.lightbox-close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 
 .modulo-opcional[hidden] { display: none; }
 
@@ -445,7 +489,6 @@ body {
 .final-butterfly { text-align: center; margin-top: 25px; }
 .final-butterfly img { width: 60px; height: auto; opacity: 0.85; }
 
-/* Mensaje de llegada del día */
 .mensaje-llegada-texto {
   font-family: var(--title-font);
   font-size: clamp(2.5rem, 8vw, 3.5rem);
@@ -510,7 +553,6 @@ body {
             <div class="time"><span id="s">0</span><small>Segundos</small></div>
           </div>
           
-          <!-- REQUERIMIENTO 7: Mensaje de "Llegó el día" -->
           <div id="mensaje-llegada" style="display: none;">
             <p class="mensaje-llegada-texto">¡Llegó el día!</p>
           </div>
@@ -533,7 +575,6 @@ body {
         <div class="box">
           <h2><i class="fa-solid fa-map-location-dot animated-icon"></i> Mapa</h2>
           <p class="texto-box-unificado">Tocá y conocé el lugar.</p>
-          <!-- REQUERIMIENTO 10: target="_blank" -->
           <a id="mapLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Ver mapa</a>
         </div>
 
@@ -563,7 +604,6 @@ body {
             Tu presencia es muy<br> importante para mí.<br>
             ¡Me encantaría<br> que me acompañes<br>en esta noche tan especial!
           </p>
-          <!-- REQUERIMIENTO 10: target="_blank" -->
           <a id="confirmLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
         </div>
 
@@ -571,7 +611,6 @@ body {
         <div id="albumFotosModule" class="box modulo-opcional">
           <h2><i class="fa-solid fa-camera animated-icon"></i> Álbum de la fiesta</h2>
           <p class="texto-box-unificado">Compartí acá<br> las fotos más lindas que<br> sacaste del cumple!</p>
-          <!-- REQUERIMIENTO 10: target="_blank" -->
           <a id="albumFotosLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Subir fotos</a>
         </div>
 
@@ -579,7 +618,6 @@ body {
         <div id="playlistModule" class="box modulo-opcional">
           <h2><i class="fa-solid fa-record-vinyl animated-icon"></i> ¡Playlist!</h2>
           <p class="texto-box-unificado">¡Ayudame sugiriendo<br> las canciones que pensás<br> que no pueden faltar en la fiesta!</p>
-          <!-- REQUERIMIENTO 10: target="_blank" -->
           <a id="playlistLink" class="button" href="#" target="_blank" rel="noopener noreferrer">Sugerir Canción</a>
         </div>
 
@@ -596,7 +634,6 @@ body {
             <div class="gift-row"><strong>Banco:</strong><span id="giftBanco"></span></div>
             <div class="gift-row"><strong>Cuenta:</strong><span id="giftCuenta"></span></div>
             <div class="copy-actions">
-              <!-- Corregido a CONFIG.regalo.Cuenta (con mayúscula) -->
               <button class="btn copy-btn" type="button" onclick="copiarDato(CONFIG.regalo.Cuenta)">Copiar cuenta</button>
             </div>
           </div>
@@ -619,12 +656,21 @@ body {
   </div>
 </div>
 
+<!-- VENTANA MODAL (LIGHTBOX) PARA AGRANDAR FOTOS -->
+<div id="lightboxModal" class="lightbox-modal">
+  <div class="lightbox-content">
+    <button type="button" class="lightbox-close" onclick="cerrarLightbox()" aria-label="Cerrar imagen">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Foto ampliada">
+  </div>
+</div>
+
 <script>
 // ========================================================================
 // CONFIGURACIÓN PRINCIPAL (DATOS)
 // ========================================================================
 const CONFIG = {
-  // --- PALETA Y FUENTES GLOBALES ---
   paleta: "esmeralda",
   fuentes: "Petit Formal Script",
 
@@ -636,7 +682,6 @@ const CONFIG = {
     overlayArriba: "", overlayAbajo: "", overlayLados: "", overlayCentro: "", sombra: ""
   },
 
-  // --- REQUERIMIENTO 9: MENÚ DE EDICIÓN AVANZADA DE TEXTOS Y MÁRGENES ---
   edicionAvanzada: {
     textos: {
       mis15: { 
@@ -707,7 +752,6 @@ const CONFIG = {
     }
   },
 
-  // --- DATOS DE LA FIESTA ---
   mostrarRegalo: true,
   mostrarPlaylist: false,
   mostrarAlbumFotos: false,
@@ -755,6 +799,7 @@ const VARIABLES_COLOR = {
 };
 
 let currentSlide = 0; let sliderTimer;
+let lightboxOpen = false;
 
 function aplicarColoresYFuentes() {
   const paleta = PALETAS[CONFIG.paleta] || PALETAS.rosa;
@@ -849,7 +894,6 @@ function configurarExtras() {
   document.getElementById("albumFotosModule").hidden = !CONFIG.mostrarAlbumFotos;
 
   if (CONFIG.mostrarRegalo) {
-    // CORREGIDO: Se ajustaron las mayúsculas para coincidir con CONFIG.regalo y se eliminó la llamada a giftCi que daba error por estar comentado en el HTML
     document.getElementById("giftTitular").innerText = CONFIG.regalo.Titular;
     document.getElementById("giftBanco").innerText = CONFIG.regalo.Banco;
     document.getElementById("giftCuenta").innerText = CONFIG.regalo.Cuenta;
@@ -892,6 +936,36 @@ function copiarDato(valor) {
   input.select(); document.execCommand("copy"); input.remove();
 }
 
+// FUNCIONES DE LIGHTBOX / FOTO AMPLIADA CON HISTORIAL
+function abrirLightbox(src, alt) {
+  const modal = document.getElementById("lightboxModal");
+  const img = document.getElementById("lightboxImg");
+  img.src = src;
+  img.alt = alt;
+  modal.classList.add("active");
+  lightboxOpen = true;
+  // Añadir un estado al historial para interceptar el botón atrás del navegador
+  history.pushState({ lightbox: true }, "");
+}
+
+function cerrarLightbox(porPopState = false) {
+  const modal = document.getElementById("lightboxModal");
+  if (modal.classList.contains("active")) {
+    modal.classList.remove("active");
+    lightboxOpen = false;
+    if (!porPopState) {
+      history.back();
+    }
+  }
+}
+
+// Escuchar el botón atrás del navegador para cerrar la foto sin salir de la invitación
+window.addEventListener("popstate", (event) => {
+  if (lightboxOpen) {
+    cerrarLightbox(true);
+  }
+});
+
 function iniciarCarrusel() {
   const track = document.getElementById("carouselTrack");
   const dots = document.getElementById("carouselDots");
@@ -901,6 +975,12 @@ function iniciarCarrusel() {
     const frame = document.createElement("div"); frame.className = "slide-frame";
     const bg = document.createElement("img"); bg.className = "slide-bg"; bg.src = foto; bg.setAttribute("aria-hidden", "true");
     const img = document.createElement("img"); img.className = "slide"; img.src = foto; img.alt = `Recuerdo ${index + 1}`;
+    
+    // Al hacer click/tap en la foto se abre el lightbox
+    img.addEventListener("click", () => {
+      abrirLightbox(foto, `Recuerdo ${index + 1}`);
+    });
+
     frame.appendChild(bg); frame.appendChild(img); track.appendChild(frame);
     const dot = document.createElement("button"); dot.className = "carousel-dot"; dot.type = "button";
     dot.addEventListener("click", () => irASlide(index)); dots.appendChild(dot);
