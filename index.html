@@ -584,8 +584,8 @@ body {
           <p id="dressCodeText" class="texto-box-unificado"></p>
         </div>
         
-        <!-- BOX 5: CARRUSEL -->
-        <div class="box">
+        <!-- BOX 5: CARRUSEL (AHORA CON OPCIÓN DE ACTIVAR/DESACTIVAR) -->
+        <div id="galeriaModule" class="box modulo-opcional">
           <h2><i class="fa-regular fa-image animated-icon"></i> Mis recuerdos</h2>
           <div class="carousel" aria-label="Carrete de fotos">
             <button class="carousel-btn prev" type="button" aria-label="Foto anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -751,7 +751,8 @@ const CONFIG = {
       distanciaEntreBotones: "15px" 
     }
   },
-
+  
+  mostrarGaleria: false, // VARIABLE AGREGADA PARA ACTIVAR/DESACTIVAR EL CARRUSEL
   mostrarRegalo: true,
   mostrarPlaylist: false,
   mostrarAlbumFotos: false,
@@ -889,6 +890,7 @@ function cargarDatos() {
 }
 
 function configurarExtras() {
+  document.getElementById("galeriaModule").hidden = !CONFIG.mostrarGaleria; // NUEVO
   document.getElementById("giftModule").hidden = !CONFIG.mostrarRegalo;
   document.getElementById("playlistModule").hidden = !CONFIG.mostrarPlaylist;
   document.getElementById("albumFotosModule").hidden = !CONFIG.mostrarAlbumFotos;
@@ -967,6 +969,7 @@ window.addEventListener("popstate", (event) => {
 });
 
 function iniciarCarrusel() {
+  if(!CONFIG.mostrarGaleria) return; // Validación de la nueva configuración
   const track = document.getElementById("carouselTrack");
   const dots = document.getElementById("carouselDots");
   if(!CONFIG.fotos || CONFIG.fotos.length === 0) return;
